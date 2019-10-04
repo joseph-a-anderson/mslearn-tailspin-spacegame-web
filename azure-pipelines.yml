@@ -38,7 +38,7 @@ steps:
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displaName: 'Publish the project - Release'
+  displayName: 'Publish the project - Release'
   inputs:
     command: 'publish'
     projects: '**/*.csproj'
@@ -49,4 +49,3 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   condition: succeeded()
-  

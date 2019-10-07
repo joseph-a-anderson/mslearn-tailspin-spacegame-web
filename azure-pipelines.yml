@@ -62,10 +62,10 @@ steps:
   displayName: 'Create code coverage report'
 
 - task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverate report'
+  displayName: 'Publish code coverage report'
   inputs:
     codeCoverageTool: 'cobertura'
-    summaryFileLocation: '$(Build.SourceDirectory)/**/coverage.cobertura.xml'
+    summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
 
 - task: DotNetCoreCLI@2
   displayName: 'Publish the project - $(buildConfiguration)'

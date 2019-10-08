@@ -94,19 +94,26 @@ steps:
 
 - task: SonarCloudPublish@1
   displayName: 'Publish SonarCloud quality gate results'
-
+  condition:  |
+    and
+      (
+        succeeded(),
+        eq(variables['Build.Reason'], 'PullRequest'),
+        eq(variables['System.PullRequest.TargetBranch'], 'master')
+      )
+      
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage report'
   inputs:
     codeCoverageTool: 'cobertura'
     summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
-    condition: |
-    and
-    (
+    condition:  |
+      and
+      (
         succeeded(),
         eq(variables['Build.Reason'], 'PullRequest'),
-        eq(variables['System.PullRequest.TargetBrabch'], 'master')
-    )
+        eq(variables['System.PullRequest.TargetBranch'], 'master')
+      )
 
 - task: DotNetCoreCLI@2
   displayName: 'Publish the project - $(buildConfiguration)'
